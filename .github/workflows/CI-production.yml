@@ -1,4 +1,4 @@
-name: ci Development
+name: ci-production
 on:
   push:
     branches: [main]
