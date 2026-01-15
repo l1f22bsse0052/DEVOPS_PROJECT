@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions - Computer Science Department</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admissions-container {
+            padding: 4rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--primary-blue);
+        }
+        
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+        
+        .timeline-content {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid var(--white);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid var(--white);
+        }
+        
+        .timeline-date {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .program-card {
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .program-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .program-header {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1.5rem;
+        }
+        
+        .program-body {
+            padding: 1.5rem;
+        }
+        
+        .program-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .program-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .program-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .program-features i {
+            color: var(--accent-gold);
+            margin-right: 0.5rem;
+        }
+        
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .requirement-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .requirement-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .deadline-card {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning-orange);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .deadline-card.important {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+        
+        .application-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-top: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .submit-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-laptop-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                <div class="logo-text">
+                    CS Department<br>
+                    <span class="dept-name">University of Technology</span>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                    <li><a href="faculty.html"><i class="fas fa-chalkboard-teacher"></i> Faculty</a></li>
+                    <li><a href="admissions.html" class="active"><i class="fas fa-user-graduate"></i> Admissions</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Start Your Journey With Us</h1>
+            <p>Join our vibrant community of innovators, thinkers, and problem-solvers. Applications for Fall 2025 are now open!</p>
+            <a href="#apply" class="cta-button">Apply Now <i class="fas fa-paper-plane"></i></a>
+        </div>
+    </section>
+
+    <!-- Admissions Content -->
+    <section class="admissions-container">
+        <div class="container">
+            <!-- Programs Offered -->
+            <div class="section-header">
+                <h2>Degree Programs</h2>
+                <p>Choose from our comprehensive range of undergraduate and graduate programs</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <!-- Program 1 -->
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>Bachelor of Science</h3>
+                        <p>Computer Science</p>
+                    </div>
+                    <div class="program-body">
+                        <p>A comprehensive 4-year program covering fundamentals and advanced topics in computing.</p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check"></i> Duration: 4 years</li>
+                            <li><i class="fas fa-check"></i> Credits: 120</li>
+                            <li><i class="fas fa-check"></i> Specializations Available</li>
+                            <li><i class="fas fa-check"></i> Internship Required</li>
+                        </ul>
+                        <a href="#" class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Program 2 -->
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>Master of Science</h3>
+                        <p>Computer Science</p>
+                    </div>
+                    <div class="program-body">
+                        <p>Advanced graduate program with research and thesis options in specialized areas.</p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check"></i> Duration: 2 years</li>
+                            <li><i class="fas fa-check"></i> Thesis/Non-thesis tracks</li>
+                            <li><i class="fas fa-check"></i> Research Opportunities</li>
+                            <li><i class="fas fa-check"></i> Industry Partnerships</li>
+                        </ul>
+                        <a href="#" class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Program 3 -->
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>PhD Program</h3>
+                        <p>Computer Science</p>
+                    </div>
+                    <div class="program-body">
+                        <p>Doctoral program for aspiring researchers and academics in cutting-edge CS fields.</p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check"></i> Duration: 4-5 years</li>
+                            <li><i class="fas fa-check"></i> Full Funding Available</li>
+                            <li><i class="fas fa-check"></i> Research Focus</li>
+                            <li><i class="fas fa-check"></i> Teaching Opportunities</li>
+                        </ul>
+                        <a href="#" class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admission Requirements -->
+            <div style="margin-top: 4rem;">
+                <h2 style="color: var(--primary-blue); margin-bottom: 2rem; text-align: center;">Admission Requirements</h2>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <h3><i class="fas fa-user-graduate"></i> Undergraduate</h3>
+                        <ul style="list-style-position: inside; margin-top: 1rem;">
+                            <li>High school diploma or equivalent</li>
+                            <li>Minimum GPA: 3.0/4.0</li>
+                            <li>SAT score: 1200+ or ACT: 25+</li>
+                            <li>Math & Science coursework</li>
+                            <li>Personal statement</li>
+                            <li>Letters of recommendation (2)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <h3><i class="fas fa-graduation-cap"></i> Graduate</h3>
+                        <ul style="list-style-position: inside; margin-top: 1rem;">
+                            <li>Bachelor's degree in CS or related field</li>
+                            <li>Minimum GPA: 3.2/4.0</li>
+                            <li>GRE score: 310+ (optional for 2025)</li>
+                            <li>Statement of purpose</li>
+                            <li>Letters of recommendation (3)</li>
+                            <li>Resume/CV</li>
+                            <li>Research proposal (PhD only)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <h3><i class="fas fa-globe-americas"></i> International Students</h3>
+                        <ul style="list-style-position: inside; margin-top: 1rem;">
+                            <li>All standard requirements</li>
+                            <li>TOEFL: 90+ or IELTS: 7.0+</li>
+                            <li>Transcript evaluation</li>
+                            <li>Financial documentation</li>
+                            <li>Visa documentation</li>
+                            <li>Health insurance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Application Timeline -->
+            <div style="margin-top: 4rem;">
+                <h2 style="color: var(--primary-blue); margin-bottom: 2rem; text-align: center;">Application Timeline</h2>
+                
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">Aug 1, 2024</div>
+                        <div class="timeline-content">
+                            <h3>Application Opens</h3>
+                            <p>Online application portal opens for Fall 2025 admissions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jan 15, 2025</div>
+                        <div class="timeline-content">
+                            <h3>Priority Deadline</h3>
+                            <p>Priority consideration for scholarships and financial aid.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mar 1, 2025</div>
+                        <div class="timeline-content">
+                            <h3>Final Deadline</h3>
+                            <p>Final deadline for all applications. No extensions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">Apr 15, 2025</div>
+                        <div class="timeline-content">
+                            <h3>Admission Decisions</h3>
+                            <p>All applicants notified of admission decisions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 1, 2025</div>
+                        <div class="timeline-content">
+                            <h3>Enrollment Deadline</h3>
+                            <p>Deadline for accepted students to confirm enrollment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Important Deadlines -->
+            <div style="margin-top: 4rem;">
+                <h2 style="color: var(--primary-blue); margin-bottom: 2rem; text-align: center;">Important Deadlines</h2>
+                
+                <div class="grid grid-2">
+                    <div class="deadline-card">
+                        <h3><i class="fas fa-calendar-check"></i> Fall 2025 Admission</h3>
+                        <p><strong>Priority Deadline:</strong> January 15, 2025</p>
+                        <p><strong>Final Deadline:</strong> March 1, 2025</p>
+                        <p><strong>Classes Start:</strong> August 25, 2025</p>
+                    </div>
+                    
+                    <div class="deadline-card important">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Scholarship Deadline</h3>
+                        <p><strong>All Scholarships:</strong> January 15, 2025</p>
+                        <p><strong>Notification:</strong> March 15, 2025</p>
+                        <p><strong>Acceptance:</strong> April 15, 2025</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Application Form -->
+            <div class="application-form" id="apply">
+                <h2 style="color: var(--primary-blue); margin-bottom: 2rem; text-align: center;">Request More Information</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Fill out the form below and our admissions team will contact you within 48 hours.</p>
+                
+                <form id="admissionForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="program">Program of Interest *</label>
+                        <select id="program" class="form-control" required>
+                            <option value="">Select a program</option>
+                            <option value="bs">Bachelor of Science in CS</option>
+                            <option value="ms">Master of Science in CS</option>
+                            <option value="phd">PhD in Computer Science</option>
+                            <option value="other">Other Programs</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Questions or Comments</label>
+                        <textarea id="message" class="form-control" rows="4"></textarea>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Financial Aid -->
+            <div style="margin-top: 4rem;">
+                <h2 style="color: var(--primary-blue); margin-bottom: 2rem; text-align: center;">Financial Aid & Scholarships</h2>
+                
+                <div class="grid grid-3">
+                    <div class="card text-center">
+                        <i class="fas fa-award" style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                        <h3>Merit Scholarships</h3>
+                        <p>Awarded based on academic excellence, test scores, and achievements.</p>
+                        <p><strong>Award:</strong> Up to full tuition</p>
+                    </div>
+                    
+                    <div class="card text-center">
+                        <i class="fas fa-hands-helping" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+                        <h3>Need-Based Aid</h3>
+                        <p>Financial assistance based on demonstrated financial need.</p>
+                        <p><strong>Deadline:</strong> January 15, 2025</p>
+                    </div>
+                    
+                    <div class="card text-center">
+                        <i class="fas fa-briefcase" style="font-size: 2.5rem; color: var(--success-green); margin-bottom: 1rem;"></i>
+                        <h3>Assistantships</h3>
+                        <p>Teaching and research assistantships for graduate students.</p>
+                        <p><strong>Includes:</strong> Tuition + Stipend</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Computer Science Department</h3>
+                    <p>University of Technology</p>
+                    <p>123 Innovation Drive</p>
+                    <p>Tech City, TC 10001</p>
+                    <p>Admissions: (555) 123-4567</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html" style="color: var(--white); text-decoration: none;">Home</a></p>
+                    <p><a href="courses.html" style="color: var(--white); text-decoration: none;">Courses</a></p>
+                    <p><a href="faculty.html" style="color: var(--white); text-decoration: none;">Faculty</a></p>
+                    <p><a href="contact.html" style="color: var(--white); text-decoration: none;">Contact Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Science Department, University of Technology. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Form Submission
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! Our admissions team will contact you shortly.');
+            this.reset();
+        });
+
+        // Set active link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            if (link.getAttribute('href') === 'admissions.html') {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
