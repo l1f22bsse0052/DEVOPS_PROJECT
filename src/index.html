@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Department - University of Technology</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stats {
+            background: var(--white);
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--secondary-blue);
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            padding: 4rem 0;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .news-item {
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .news-date {
+            color: var(--secondary-blue);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-laptop-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                <div class="logo-text">
+                    CS Department<br>
+                    <span class="dept-name">University of Technology</span>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                    <li><a href="faculty.html"><i class="fas fa-chalkboard-teacher"></i> Faculty</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-graduate"></i> Admissions</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Shaping the Future of Computing</h1>
+            <p>Join us in exploring the frontiers of technology, innovation, and research. Our department combines academic excellence with real-world applications to prepare the next generation of tech leaders.</p>
+            <a href="admissions.html" class="cta-button">Start Your Journey <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats">
+        <div class="container">
+            <div class="grid grid-3">
+                <div class="stat-item">
+                    <div class="stat-number">2000+</div>
+                    <div class="stat-label">Students Enrolled</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Faculty Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Courses Offered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Our Department?</h2>
+                <p>We provide an exceptional learning environment with cutting-edge resources</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Research Excellence</h3>
+                    <p>State-of-the-art labs and research centers working on AI, Cybersecurity, Data Science, and more.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Industry Partnerships</h3>
+                    <p>Strong ties with leading tech companies for internships, projects, and career opportunities.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Community</h3>
+                    <p>Diverse student body and faculty from around the world fostering global perspectives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News and Events -->
+    <section style="background: var(--white); padding: 4rem 0;">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div>
+                    <h2 style="color: var(--primary-blue); margin-bottom: 2rem;">Latest News</h2>
+                    <div class="news-item">
+                        <div class="news-date">Dec 15, 2024</div>
+                        <h4>New AI Research Center Opening</h4>
+                        <p>Our department is launching a new AI research center with $5M in funding from industry partners.</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">Dec 10, 2024</div>
+                        <h4>Students Win National Hackathon</h4>
+                        <p>Our team secured first place in the National Coding Challenge 2024 with their innovative healthcare solution.</p>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">Dec 5, 2024</div>
+                        <h4>Spring 2025 Registration Opens</h4>
+                        <p>Registration for Spring 2025 courses is now open. New courses in Quantum Computing available.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 style="color: var(--primary-blue); margin-bottom: 2rem;">Upcoming Events</h2>
+                    <div class="card" style="margin-bottom: 1rem; background: var(--light-gray);">
+                        <h4><i class="fas fa-calendar-alt" style="color: var(--primary-blue);"></i> Tech Career Fair 2024</h4>
+                        <p><strong>Date:</strong> Jan 20, 2025</p>
+                        <p>Meet top tech companies including Google, Microsoft, and Amazon.</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 1rem; background: var(--light-gray);">
+                        <h4><i class="fas fa-calendar-alt" style="color: var(--primary-blue);"></i> Open House Day</h4>
+                        <p><strong>Date:</strong> Jan 25, 2025</p>
+                        <p>Prospective students can tour our facilities and meet faculty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Computer Science Department</h3>
+                    <p>University of Technology</p>
+                    <p>123 Innovation Drive</p>
+                    <p>Tech City, TC 10001</p>
+                    <p>Email: csdept@university.edu</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="courses.html" style="color: var(--white); text-decoration: none;">Courses</a></p>
+                    <p><a href="faculty.html" style="color: var(--white); text-decoration: none;">Faculty Directory</a></p>
+                    <p><a href="admissions.html" style="color: var(--white); text-decoration: none;">Admissions</a></p>
+                    <p><a href="contact.html" style="color: var(--white); text-decoration: none;">Contact Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Science Department, University of Technology. All rights reserved.</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">This website is part of a DevOps academic project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            if (!navMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Set active link based on current page
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
