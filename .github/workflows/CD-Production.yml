@@ -1,0 +1,17 @@
+name: cd-production
+on:
+  workflow_run:
+    workflows: ["ci-production"]
+    types: completed
+    branches: [main]
+jobs:
+  deploy:
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: triger deploy via hook
+        env:
+          RENDER_HOOK: ${{secrets.RENDER_DEPLOYMENT_HOOK}}
+        run: |
+          curl -X POST "$RENDER_HOOK"
