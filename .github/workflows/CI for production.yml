@@ -1,0 +1,27 @@
+name: ci Development
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: 
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup docker
+        uses: docker/setup-buildx-actions@v3
+      - name: login to docker
+        uses: docker/login-actions@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+      - name: build and push
+        uses: docker/build-push-actions@v5
+        with:
+          context: .
+          push: true
+          tag: |
+            ${{secrets.DOCKERHUB_USERNAME}}/project-production:latest
+            ${{secrets.DOCKERHUB_USERNAME}}/project-production:${{github.sha}}
+        
