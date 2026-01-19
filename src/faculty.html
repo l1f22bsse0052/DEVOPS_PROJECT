@@ -473,4 +473,123 @@
         <div class="container">
             <div class="section-header">
                 <h2>Research Areas</h2>
-                <p>Our faculty lead cutting-edge research in these key areas</p
+                <p>Our faculty lead cutting-edge research in these key areas</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Machine learning, computer vision, natural language processing, and robotics research.</p>
+                </div>
+                
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Network security, cryptography, privacy-preserving technologies, and secure systems.</p>
+                </div>
+                
+                <div class="area-card">
+                    <div class="area-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Science</h3>
+                    <p>Big data analytics, data mining, predictive modeling, and business intelligence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Computer Science Department</h3>
+                    <p>University of Technology</p>
+                    <p>123 Innovation Drive</p>
+                    <p>Tech City, TC 10001</p>
+                    <p>Email: csdept@university.edu</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="courses.html" style="color: var(--white); text-decoration: none;">Courses</a></p>
+                    <p><a href="faculty.html" style="color: var(--white); text-decoration: none;">Faculty Directory</a></p>
+                    <p><a href="admissions.html" style="color: var(--white); text-decoration: none;">Admissions</a></p>
+                    <p><a href="contact.html" style="color: var(--white); text-decoration: none;">Contact Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Science Department, University of Technology. All rights reserved.</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">This website is part of a DevOps academic project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Faculty filtering
+        const specializationFilter = document.getElementById('specializationFilter');
+        const positionFilter = document.getElementById('positionFilter');
+        const nameFilter = document.getElementById('nameFilter');
+        const facultyCards = document.querySelectorAll('.faculty-card');
+
+        function filterFaculty() {
+            const specialization = specializationFilter.value;
+            const position = positionFilter.value;
+            const name = nameFilter.value.toLowerCase();
+
+            facultyCards.forEach(card => {
+                const cardSpecialization = card.dataset.specialization;
+                const cardPosition = card.dataset.position;
+                const cardName = card.querySelector('h3').textContent.toLowerCase();
+
+                const matchesSpecialization = !specialization || cardSpecialization === specialization;
+                const matchesPosition = !position || cardPosition === position;
+                const matchesName = !name || cardName.includes(name);
+
+                if (matchesSpecialization && matchesPosition && matchesName) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        specializationFilter.addEventListener('change', filterFaculty);
+        positionFilter.addEventListener('change', filterFaculty);
+        nameFilter.addEventListener('input', filterFaculty);
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Set active link
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
