@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty - Computer Science Department</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .faculty-filters {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 1200px;
+            box-shadow: var(--shadow);
+        }
+        
+        .filter-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .filter-select {
+            padding: 0.8rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .faculty-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .faculty-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .faculty-header {
+            position: relative;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .faculty-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-gold);
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-blue);
+        }
+        
+        .faculty-body {
+            padding: 1.5rem;
+        }
+        
+        .faculty-info {
+            margin-bottom: 1rem;
+        }
+        
+        .faculty-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-blue);
+        }
+        
+        .specializations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .specialization-tag {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .office-hours {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .publications-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .research-areas {
+            margin: 4rem 0;
+        }
+        
+        .area-card {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .area-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 4rem;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-laptop-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                <div class="logo-text">
+                    CS Department<br>
+                    <span class="dept-name">University of Technology</span>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                    <li><a href="faculty.html" class="active"><i class="fas fa-chalkboard-teacher"></i> Faculty</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-graduate"></i> Admissions</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="hero" style="padding: 80px 0;">
+        <div class="hero-content">
+            <h1>Meet Our Faculty</h1>
+            <p>World-class educators and researchers dedicated to advancing computer science and mentoring the next generation.</p>
+        </div>
+    </section>
+
+    <!-- Faculty Filters -->
+    <div class="container">
+        <div class="faculty-filters">
+            <h3>Find Faculty Members</h3>
+            <div class="filter-group">
+                <select class="filter-select" id="specializationFilter">
+                    <option value="">All Specializations</option>
+                    <option value="ai">Artificial Intelligence</option>
+                    <option value="software">Software Engineering</option>
+                    <option value="security">Cybersecurity</option>
+                    <option value="data">Data Science</option>
+                    <option value="systems">Computer Systems</option>
+                </select>
+                
+                <select class="filter-select" id="positionFilter">
+                    <option value="">All Positions</option>
+                    <option value="professor">Professor</option>
+                    <option value="associate">Associate Professor</option>
+                    <option value="assistant">Assistant Professor</option>
+                    <option value="lecturer">Lecturer</option>
+                </select>
+                
+                <input type="text" class="filter-select" id="nameFilter" placeholder="Search by name...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Faculty Members -->
+    <section class="faculty-list">
+        <div class="container">
+            <div class="faculty-grid">
+                <!-- Faculty 1 -->
+                <div class="faculty-card" data-specialization="ai" data-position="professor">
+                    <div class="faculty-header">
+                        <div class="faculty-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Dr. James Wilson</h3>
+                        <p>Professor & Department Chair</p>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-info">
+                            <div class="faculty-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>jwilson@university.edu</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CS Building, Room 301</span>
+                            </div>
+                        </div>
+                        
+                        <div class="specializations">
+                            <span class="specialization-tag">Machine Learning</span>
+                            <span class="specialization-tag">Computer Vision</span>
+                            <span class="specialization-tag">Neural Networks</span>
+                        </div>
+                        
+                        <div class="office-hours">
+                            <strong>Office Hours:</strong><br>
+                            Mon, Wed: 2:00 PM - 4:00 PM<br>
+                            Fri: 10:00 AM - 12:00 PM
+                        </div>
+                        
+                        <a href="#" class="publications-btn">
+                            <i class="fas fa-file-alt"></i> View Publications
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Faculty 2 -->
+                <div class="faculty-card" data-specialization="software" data-position="associate">
+                    <div class="faculty-header">
+                        <div class="faculty-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Prof. Michael Brown</h3>
+                        <p>Associate Professor</p>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-info">
+                            <div class="faculty-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>mbrown@university.edu</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4568</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CS Building, Room 205</span>
+                            </div>
+                        </div>
+                        
+                        <div class="specializations">
+                            <span class="specialization-tag">Software Architecture</span>
+                            <span class="specialization-tag">Agile Development</span>
+                            <span class="specialization-tag">DevOps</span>
+                        </div>
+                        
+                        <div class="office-hours">
+                            <strong>Office Hours:</strong><br>
+                            Tue, Thu: 1:00 PM - 3:00 PM<br>
+                            By appointment
+                        </div>
+                        
+                        <a href="#" class="publications-btn">
+                            <i class="fas fa-file-alt"></i> View Publications
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Faculty 3 -->
+                <div class="faculty-card" data-specialization="security" data-position="assistant">
+                    <div class="faculty-header">
+                        <div class="faculty-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Dr. Lisa Park</h3>
+                        <p>Assistant Professor</p>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-info">
+                            <div class="faculty-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>lpark@university.edu</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4569</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CS Building, Room 118</span>
+                            </div>
+                        </div>
+                        
+                        <div class="specializations">
+                            <span class="specialization-tag">Network Security</span>
+                            <span class="specialization-tag">Cryptography</span>
+                            <span class="specialization-tag">Ethical Hacking</span>
+                        </div>
+                        
+                        <div class="office-hours">
+                            <strong>Office Hours:</strong><br>
+                            Mon, Wed, Fri: 11:00 AM - 1:00 PM
+                        </div>
+                        
+                        <a href="#" class="publications-btn">
+                            <i class="fas fa-file-alt"></i> View Publications
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Faculty 4 -->
+                <div class="faculty-card" data-specialization="data" data-position="professor">
+                    <div class="faculty-header">
+                        <div class="faculty-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Dr. Robert Kim</h3>
+                        <p>Professor</p>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-info">
+                            <div class="faculty-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>rkim@university.edu</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4570</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CS Building, Room 402</span>
+                            </div>
+                        </div>
+                        
+                        <div class="specializations">
+                            <span class="specialization-tag">Big Data</span>
+                            <span class="specialization-tag">Data Mining</span>
+                            <span class="specialization-tag">Predictive Analytics</span>
+                        </div>
+                        
+                        <div class="office-hours">
+                            <strong>Office Hours:</strong><br>
+                            Tue, Thu: 10:00 AM - 12:00 PM<br>
+                            Fri: 2:00 PM - 4:00 PM
+                        </div>
+                        
+                        <a href="#" class="publications-btn">
+                            <i class="fas fa-file-alt"></i> View Publications
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Faculty 5 -->
+                <div class="faculty-card" data-specialization="ai" data-position="assistant">
+                    <div class="faculty-header">
+                        <div class="faculty-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Dr. Amanda Lee</h3>
+                        <p>Assistant Professor</p>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-info">
+                            <div class="faculty-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>alee@university.edu</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4571</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CS Building, Room 215</span>
+                            </div>
+                        </div>
+                        
+                        <div class="specializations">
+                            <span class="specialization-tag">NLP</span>
+                            <span class="specialization-tag">Deep Learning</span>
+                            <span class="specialization-tag">AI Ethics</span>
+                        </div>
+                        
+                        <div class="office-hours">
+                            <strong>Office Hours:</strong><br>
+                            Mon, Wed: 3:00 PM - 5:00 PM
+                        </div>
+                        
+                        <a href="#" class="publications-btn">
+                            <i class="fas fa-file-alt"></i> View Publications
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Faculty 6 -->
+                <div class="faculty-card" data-specialization="systems" data-position="lecturer">
+                    <div class="faculty-header">
+                        <div class="faculty-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Dr. Sarah Chen</h3>
+                        <p>Lecturer</p>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-info">
+                            <div class="faculty-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>schen@university.edu</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4572</span>
+                            </div>
+                            <div class="faculty-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CS Building, Room 101</span>
+                            </div>
+                        </div>
+                        
+                        <div class="specializations">
+                            <span class="specialization-tag">Operating Systems</span>
+                            <span class="specialization-tag">Distributed Systems</span>
+                            <span class="specialization-tag">Cloud Computing</span>
+                        </div>
+                        
+                        <div class="office-hours">
+                            <strong>Office Hours:</strong><br>
+                            Tue, Thu: 9:00 AM - 11:00 AM<br>
+                            By appointment
+                        </div>
+                        
+                        <a href="#" class="publications-btn">
+                            <i class="fas fa-file-alt"></i> View Publications
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Areas -->
+    <section class="research-areas">
+        <div class="container">
+            <div class="section-header">
+                <h2>Research Areas</h2>
+                <p>Our faculty lead cutting-edge research in these key areas</p>
