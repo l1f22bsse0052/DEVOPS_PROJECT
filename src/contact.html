@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Computer Science Department</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .form-textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .info-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .map-container {
+            margin: 3rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-placeholder {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .department-hours {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+        
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .hours-table tr {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .hours-table td {
+            padding: 1rem 0.5rem;
+        }
+        
+        .hours-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .emergency-contact {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .staff-directory {
+            margin: 3rem 0;
+        }
+        
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .staff-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .staff-role {
+            color: var(--secondary-blue);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        
+        .response-time {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-laptop-code" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                <div class="logo-text">
+                    CS Department<br>
+                    <span class="dept-name">University of Technology</span>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-book"></i> Courses</a></li>
+                    <li><a href="faculty.html"><i class="fas fa-chalkboard-teacher"></i> Faculty</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-graduate"></i> Admissions</a></li>
+                    <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="hero" style="padding: 80px 0;">
+        <div class="hero-content">
+            <h1>Get In Touch</h1>
+            <p>We're here to help. Reach out to us with questions, feedback, or to schedule a visit.</p>
+        </div>
+    </section>
+
+    <!-- Contact Form and Info -->
+    <div class="container">
+        <div class="contact-container">
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2 style="color: var(--primary-blue); margin-bottom: 2rem;">Send Us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name *</label>
+                        <input type="text" id="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject *</label>
+                        <select id="subject" class="form-input" required>
+                            <option value="">Select a subject</option>
+                            <option value="admissions">Admissions Inquiry</option>
+                            <option value="courses">Course Information</option>
+                            <option value="faculty">Faculty Contact</option>
+                            <option value="research">Research Opportunities</option>
+                            <option value="partnership">Industry Partnership</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message *</label>
+                        <textarea id="message" class="form-textarea" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Visit Our Campus</h3>
+                            <p>We welcome visitors to our facilities</p>
+                        </div>
+                    </div>
+                    <p><strong>Computer Science Department</strong><br>
+                    University of Technology<br>
+                    123 Innovation Drive<br>
+                    Tech City, TC 10001<br>
+                    United States</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>Available during business hours</p>
+                        </div>
+                    </div>
+                    <p><strong>Main Office:</strong> +1 (555) 123-4500<br>
+                    <strong>Admissions:</strong> +1 (555) 123-4501<br>
+                    <strong>Fax:</strong> +1 (555) 123-4502</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>We respond within 24-48 hours</p>
+                        </div>
+                    </div>
+                    <p><strong>General Inquiries:</strong> csdept@university.edu<br>
+                    <strong>Admissions:</strong> cs-admissions@university.edu<br>
+                    <strong>Career Services:</strong> cs-careers@university.edu<br>
+                    <strong>Research:</strong> cs-research@university.edu</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map -->
+        <div class="map-container">
+            <div class="map-placeholder">
+                <div>
+                    <i class="fas fa-map-marked-alt" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                    <h3>Campus Location</h3>
+                    <p>Computer Science Building, Room 100</p>
+                    <p>Parking available in Lot C</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Department Hours -->
+        <div class="department-hours">
+            <h2 style="color: var(--primary-blue); margin-bottom: 1rem;">Department Hours</h2>
+            <table class="hours-table">
+                <tr>
+                    <td><strong>Monday - Thursday</strong></td>
+                    <td>8:00 AM - 8:00 PM</td>
+                </tr>
+                <tr>
+                    <td><strong>Friday</strong></td>
+                    <td>8:00 AM - 5:00 PM</td>
+                </tr>
+                <tr>
+                    <td><strong>Saturday</strong></td>
+                    <td>10:00 AM - 4:00 PM</td>
+                </tr>
+                <tr>
+                    <td><strong>Sunday</strong></td>
+                    <td>Closed</td>
+                </tr>
+                <tr>
+                    <td><strong>Holidays</strong></td>
+                    <td>See university calendar</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Emergency Contact -->
+        <div class="emergency-contact">
+            <h3><i class="fas fa-exclamation-triangle"></i> Emergency Contact</h3>
+            <p>For immediate assistance during non-business hours:</p>
+            <p style="font-size: 1.5rem; margin: 1rem 0;">
+                <i class="fas fa-phone"></i> +1 (555) 123-9999
+            </p>
+            <p>Campus Security available 24/7</p>
+        </div>
+        
+        <!-- Staff Directory -->
+        <div class="staff-directory">
+            <h2 style="color: var(--primary-blue); margin-bottom: 1rem;">Key Contacts</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <h4>Dr. James Wilson</h4>
+                    <div class="staff-role">Department Chair</div>
+                    <p>Overall department administration and strategic planning</p>
+                    <div class="response-time">Response: 1-2 business days</div>
+                </div>
+                
+                <div class="staff-card">
+                    <h4>Sarah Johnson</h4>
+                    <div class="staff-role">Admissions Coordinator</div>
+                    <p>Undergraduate and graduate admissions inquiries</p>
+                    <div class="response-time">Response: 1-2 business days</div>
+                </div>
+                
+                <div class="staff-card">
+                    <h4>Michael Chen</h4>
+                    <div class="staff-role">Student Affairs</div>
+                    <p>Academic advising, student support, and counseling</p>
+                    <div class="response-time">Response: Same day</div>
+                </div>
+                
+                <div class="staff-card">
+                    <h4>Lisa Rodriguez</h4>
+                    <div class="staff-role">Industry Relations</div>
+                    <p>Internships, career placement, and corporate partnerships</p>
+                    <div class="response-time">Response: 2-3 business days</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Computer Science Department</h3>
+                    <p>University of Technology</p>
+                    <p>123 Innovation Drive</p>
+                    <p>Tech City, TC 10001</p>
+                    <p>Email: csdept@university.edu</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="courses.html" style="color: var(--white); text-decoration: none;">Courses</a></p>
+                    <p><a href="faculty.html" style="color: var(--white); text-decoration: none;">Faculty Directory</a></p>
+                    <p><a href="admissions.html" style="color: var(--white); text-decoration: none;">Admissions</a></p>
+                    <p><a href="contact.html" style="color: var(--white); text-decoration: none;">Contact Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Computer Science Department, University of Technology. All rights reserved.</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">This website is part of a DevOps academic project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // In a real application, you would send this data to a server
+            // For this demo, we'll just show an alert
+            alert('Thank you for your message! We will respond within 24-48 hours.\n\n' +
+                  'Name: ' + formData.name + '\n' +
+                  'Email: ' + formData.email + '\n' +
+                  'Subject: ' + formData.subject);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Set active link
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
